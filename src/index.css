@@ -7,3 +7,11 @@
         font-family: 'Raleway', sans-serif;
     }
 }
+
+.title-gray{
+    @apply text-5xl text-center font-rancho text-slate-gray drop-shadow-lg
+}
+
+.title-deep-midnight {
+    @apply text-5xl text-center font-rancho text-deep-midnight drop-shadow-lg
+}
