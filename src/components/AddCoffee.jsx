@@ -1,4 +1,5 @@
 import { BsCup } from "react-icons/bs";
+import Swal from 'sweetalert2'
 
 const AddCoffee = () => {
 
@@ -12,9 +13,29 @@ const AddCoffee = () => {
         const taste = form.taste.value;
         const details = form.details.value;
         const photo = form.photo.value;
+        const newCoffee = { name, supplier, category, chef, taste, details, photo };
 
-        console.log(`Name: ${name}, Supplier: ${supplier}, Category: ${category}, Chef: ${chef}, Taste: ${taste}, Details: ${details}, Photo: ${photo}`);
+        fetch(`http://localhost:5000/coffee`, {
+            method: "POST",
+            body: JSON.stringify(newCoffee),
+            headers: {
+                "content-type": "application/json"
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                form.reset();
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Do you want to continue',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                    })
+                }
 
+            })
+            .catch(error => console.log(error))
     }
 
     return (
